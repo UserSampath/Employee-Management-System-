@@ -1,8 +1,7 @@
 .signContainer2 {
-padding-top: 10px;;
+padding-top: 30px;
   /* padding-left: 80px;   */
-  
-}
+  }
 
 .centerSignIn{
    display: flex;
@@ -13,6 +12,7 @@ padding-top: 10px;;
 .buttonsContainer{
   margin-top: 25px;
   display: flex;
+  gap: 10px;
  
 }
 

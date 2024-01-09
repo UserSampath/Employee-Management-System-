@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
 
@@ -43,4 +43,4 @@ const SearchBar = ({ inputSearchMembers, setFilteredUsers }) => {
   );
 };
 
-export default SearchBar
+export default SearchBar;

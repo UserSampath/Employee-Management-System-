@@ -6,12 +6,13 @@ import { FaPlus } from 'react-icons/fa';
 import AddUserModal from "../../components/AddUserModal/AddUserModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import SearchBar from "../../components/searchBar/SearchBar";
 
 const ApiTeam = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
@@ -21,22 +22,18 @@ const ApiTeam = () => {
   }, []);
 
   const getUserData = async () => {
-    await axios
-      .get("http://localhost:4000/api/rate/getRateUsersForAdmin", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setUsers(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        navigate("/login");
-      });
-  };
+      const team="Api Team"
+      await axios
+        .get(`http://localhost:4000/api/member/getTeamMembers/${team}`)
+        .then((res) => {
+          console.log(res.data);
+          setUsers(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          // navigate("/login");
+        });
+    };
   const handleUserDeleted = (deletedUserId) => {
     setUsers((prevUsers) =>
       prevUsers.filter((user) => user._id !== deletedUserId)
@@ -58,6 +55,10 @@ const ApiTeam = () => {
           <div
             style={{ marginRight: "80px" }}
             className="mt-2 d-flex justify-content-end">
+            <SearchBar
+              inputSearchMembers={users}
+              setFilteredUsers={setFilteredUsers}
+            />
             <button
               onClick={handleShow}
               className="button-1 d-flex justify-content-center align-items-center"
@@ -73,9 +74,9 @@ const ApiTeam = () => {
               Add new
             </button>
           </div>
-          ssssss
-          {users &&
-            users.map((user, index) => {
+
+          {filteredUsers &&
+            filteredUsers.map((user, index) => {
               return (
                 <UserDetails
                   user={user}

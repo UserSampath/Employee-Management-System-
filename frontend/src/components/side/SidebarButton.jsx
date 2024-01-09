@@ -18,6 +18,7 @@ const SidebarButton = (props) => {
       }}>
       <div>
         <div
+          onClick={()=>props.onClick()}
           className={
             props.selected == true
               ? "selectedSidebarButton"

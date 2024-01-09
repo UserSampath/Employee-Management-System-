@@ -1,0 +1,25 @@
+.iconButtonContainerRed {
+  background-color: #ffcacaa3;
+  transition: ease-in-out 150ms;
+}
+.iconButtonContainerGreen {
+  background-color: #8cf087a3;
+    transition: ease-in 100ms;
+}
+.iconButtonTextRed {
+  color: red;
+}
+.iconButtonTextGreen {
+  color: green;
+}
+
+.ss:hover {
+  cursor: pointer;
+}
+
+.iconButtonContainerRed:hover {
+  background-color: #f9b3b3a3;
+}
+.iconButtonContainerGreen:hover {
+  background-color: #58f350a3;
+}

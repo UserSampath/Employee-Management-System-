@@ -1,0 +1,61 @@
+.inputComponent {
+  margin-top: 5px;
+}
+
+.inputLine {
+  display: flex;
+  background-color: rgb(239, 239, 239);
+  width: 280px;
+  height: 45px;
+  border-radius: 5px;
+}
+.inputLineError {
+  display: flex;
+  width: 280px;
+  height: 45px;
+  border: 1px solid red;
+  background-color: rgba(251, 230, 230, 0.852);
+  border-radius: 5px;
+}
+
+.input {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  border: none !important;
+  background: transparent !important;
+  color: rgb(0, 0, 0) !important;
+  outline: none !important;
+  font-size: medium !important;
+  cursor: text !important;
+  width: 100%;
+}
+
+.icon {
+  height: 21px;
+  width: 21px;
+  margin-left: 4px;
+  margin-right: 7px;
+  margin-top: 12px;
+  color: #888888;
+}
+
+.inputName {
+  color: black;
+}
+
+.errorMessageShow {
+  position: absolute;
+  background-color: rgba(250, 217, 217, 0.908);
+  border: 1px red solid;
+  color: red;
+  padding: 2px 8px 2px 8px;
+  /* width: 268px; */
+  border-radius: 0px 10px 10px 10px;
+  margin-left: 30px;
+  margin-top: 60px;
+  font-size: 12px;
+}
+.errorMessageHide {
+  display: none;
+}

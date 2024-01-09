@@ -1,0 +1,29 @@
+.modaldata{
+    align-items: center;
+    padding:10px;
+    
+}
+.modalImage{
+    align-items: center;
+    padding:10px;
+}
+.image{
+    width:150px;
+    height:150px;
+}
+.userD {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .name {
+    display: flex;
+    justify-content: space-between;
+    gap:8px;
+    color:#10B116;
+    weight:semi-bold
+  }
+  .rating-stars{
+    cursor:pointer;
+  }

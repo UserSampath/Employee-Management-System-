@@ -1,0 +1,34 @@
+.sidebarContainer {
+  background-color: #f7ede597;
+
+  height: calc(100vh - 50px);
+  width: 230px;
+  position: fixed;
+  top: 50px;
+  border-right: 2px solid rgb(250, 222, 169);
+}
+
+.selectedSidebarButton {
+  background: linear-gradient(to right, #fe5900, #fca35fd3);
+  color: rgb(255, 255, 255) !important;
+  font-weight: 100;
+}
+.notSelectedSidebarButton {
+  background-color: #efc8b388;
+  color: rgb(74, 74, 74) !important;
+  font-weight: 100;
+}
+
+.selectedSidebarIcon {
+  color: white !important;
+}
+.notSelectedSidebarIcon {
+  color: rgb(74, 74, 74) !important;
+}
+
+.notSelectedSidebarButton:hover {
+  background: linear-gradient(to right, #fe5900, #ff8c33);
+  color: rgb(255, 255, 255) !important;
+  font-weight: 100;
+  cursor: pointer;
+}

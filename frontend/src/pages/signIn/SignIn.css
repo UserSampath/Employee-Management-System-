@@ -1,0 +1,75 @@
+.signInContainer {
+padding-top: 80px;
+  /* padding-left: 80px;   */
+  
+}
+
+.centerSignIn{
+   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonsContainer{
+  margin-top: 25px;
+  display: flex;
+ 
+}
+
+.forgotPassword{
+  text-decoration: underline;
+  margin-top: 15px;
+  margin-right: 80px;
+  font-size: 14px;
+  transition: ease 0.2s;
+}
+
+.forgotPassword:hover{
+color: var(--buttonColor);
+cursor: pointer;
+}
+
+
+.imageContainer{
+  right: 0;
+  width: 55%;
+  height: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rebeccapurple; */
+
+}
+
+.boxContainer{
+  display: flex;
+}
+
+.imageBox{
+
+}
+
+.signInImage{
+  width: 80%;
+  margin-left: 10%;
+}
+
+
+.imgContainerText{
+  margin-left: 20px;
+  padding-top: 10px;
+}
+
+.newHereContainer{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.newHereButton{
+  margin-left: 18px;
+  margin-top: 5px;
+}
+.whiteH2{
+  color: white !important;
+}

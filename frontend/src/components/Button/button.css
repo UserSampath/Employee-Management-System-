@@ -1,0 +1,37 @@
+.button-1 {
+  color: white;
+  height: 40px;
+  padding: 8px 12px;
+  background-color: var(--title-color);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  display: inline-block;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.button-2 {
+  color: rgb(255, 255, 255);
+  height: 40px;
+  padding: 8px 12px;
+  background-color:black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  display: inline-block;
+  font-weight: 600;
+  transition: all 0.3s;
+
+}
+
+.button-1:hover {
+  background-color: #fe5b00;
+  color: white;
+  cursor: pointer;
+}
+
+.button-2:hover{
+  background-color: #fe5b00;
+  color: white;
+  cursor: pointer;
+}

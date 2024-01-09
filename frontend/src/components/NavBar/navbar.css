@@ -1,0 +1,30 @@
+.imageDiv{
+    display :flex ;
+    align-items:center;
+    padding:5px;
+}
+.Logo{
+    width:85px;
+    padding:10px
+}
+
+.input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: transparent;
+    color: rgb(255, 255, 255);
+    outline: none;
+    cursor: text;
+  }
+.nav{
+    background-color:#FE5B00;
+    padding:10px;
+    position:fixed;
+}
+.brand{
+    display:flex;
+    padding:5px;
+    margin:0;
+}

@@ -1,10 +1,10 @@
 module.exports = {
     Teams: {
-      WebTeam: "WebTeam",
-      ApiTeam: "ApiTeam",
-      FlutterTeam: "FlutterTeam",
-      QaTeam: "QaTeam",
-      UiTeam: "UiTeam",
+      WebTeam: "Web Team",
+      ApiTeam: "Api Team",
+      FlutterTeam: "Flutter Team",
+      QaTeam: "Qa Team",
+      UiTeam: "Ui Team",
     },
   };
   

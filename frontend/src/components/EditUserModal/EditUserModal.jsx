@@ -4,18 +4,34 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/esm/Button';
 import { Form } from 'react-bootstrap';
 import Axios from 'axios';
-import { FaUser, FaBriefcase, FaFile, FaImage } from 'react-icons/fa';
+import { FaUser, FaBriefcase, FaFile, FaImage ,FaUsers} from 'react-icons/fa';
 import FileBase64 from "react-file-base64";
+import { SlCalender } from "react-icons/sl";
+import Select from 'react-select';
 
 const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    Job: '',
-    Description: '',
-    Image: null, 
+    firstName: "",
+    lastName: "",
+    Job: "",
+    Description: "",
+    Image: null,
+    StartedDate: "",
+    SelectedTeams: [],
+    email: "",
+    Projects: [],
+    contactNumber :"" ,
   });
+
+
+  const handleTeamSelect = (selectedOptions) => {
+    const selectedTeams = selectedOptions.map(option => option.value);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      SelectedTeams: selectedTeams,
+    }));
+  };
 
  {} useEffect(() => {
     setFormData({
@@ -24,6 +40,10 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
       Job: userData.Job,
       Description: userData.Description,
       Image: userData.Image,
+      StartedDate:userData.StartedDate,
+      SelectedTeams:userData.SelectedTeams,
+      email:userData.email,
+      Projects:userData.Projects
     });
  
 }, [userData]);
@@ -43,6 +63,25 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
     handleClose();
   }
 
+  const handleProjectInputChange = (e) => {
+    const input = e.target.value;
+    const projects = input.split(',').map(project => project.trim());
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      Projects: projects,
+    }));
+  }
+
+  
+  const [teams, setTeams] = useState([
+    { value: "Web Team", label: "Web Team" },
+    { value: "Api Team", label: "Api Team" },
+    { value: "Flutter Team", label: "Flutter Team" },
+    { value: "Qa Team", label: "Qa Team" },
+    { value: "Ui Team", label: "Ui Team" },
+    // Add other teams as needed
+  ]);
+
 
   return (
     <div>
@@ -50,7 +89,7 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
         <Modal.Header>
           <Modal.Title
             style={{ margin: "auto", paddingLeft: "0px", fontSize: "30px" }}>
-            Edit User
+            Edit Member
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -83,6 +122,21 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
               />
             </Form.Group>
 
+            <Form.Group controlId="formEmail">
+              <Form.Label>
+                <FaUser /> Email:
+              </Form.Label>
+              <Form.Control
+                type="text"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder="Enter your last name"
+                style={{ borderRadius: "10px" }}
+              />
+            </Form.Group>
+
+
             <Form.Group controlId="formJob">
               <Form.Label>
                 <FaBriefcase /> Job:
@@ -108,6 +162,60 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your description"
                 style={{ borderRadius: "10px" }}
+              />
+            </Form.Group>
+
+
+            <Form.Group controlId="formContactNumber">
+              <Form.Label>
+                <FaFile /> Contact Number:
+              </Form.Label>
+              <Form.Control
+                type="text"
+                name="Contact Number"
+                value={formData.contactNumber}
+                onChange={handleInputChange}
+                placeholder="Enter Contact Number"
+                style={{ borderRadius: "10px" }}
+              />
+              </Form.Group>
+
+            <Form.Group controlId="formProjects">
+              <Form.Label>
+                <FaFile /> Projects:
+              </Form.Label>
+              <Form.Control
+                type="text"
+                name="Projects"
+                value={formData.Projects.join(', ')}
+                onChange={handleProjectInputChange}
+                placeholder="Enter project names, separated by commas"
+                style={{ borderRadius: "10px" }}
+              />
+              </Form.Group>
+
+            <Form.Group controlId="formStartedDate">
+            <Form.Label>
+              <SlCalender /> Started Date:
+            </Form.Label>
+            <Form.Control
+              type="date"
+              name="StartedDate"
+              value={formData.StartedDate}
+              onChange={handleInputChange}
+              style={{ borderRadius: "10px" }}
+            />
+          </Form.Group>
+
+         <Form.Group controlId="formSelectedTeams">
+              <Form.Label>
+                <FaUsers /> Selected Teams:
+              </Form.Label>
+              <Select
+                isMulti
+                options={teams}
+                value={teams.filter(option => formData.SelectedTeams.includes(option.value))}
+                onChange={handleTeamSelect}
               />
             </Form.Group>
 

@@ -100,24 +100,24 @@ const UpdateRateUser = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+*/
 
-
-const GetRateUser = async (req, res) => {
+const GetMember = async (req, res) => {
     const userId = req.params.id;
     try {
-        const rateUser = await RateuserModel.findById(userId);
+        const Member = await MemberModel.findById(userId);
 
-        if (!rateUser) {
+        if (!Member) {
             throw Error("User not found");
         }
 
-        res.status(200).json({ rateUser });
+        res.status(200).json({ Member });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
 
-// new
+/*
 const rateUser = async (req, res) => {
     const { Rate, id } = req.body;
     try {
@@ -167,7 +167,7 @@ const getTeamMembers = async (req, res) => {
 module.exports = {
     //DeleteRateUser,
     //UpdateRateUser,
-    //GetRateUser,
+    GetMember,
     //rateUser,
     //getRateUsers,
     getMembers,

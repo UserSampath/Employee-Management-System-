@@ -48,6 +48,9 @@ const MemberSchema = new Schema(
       type: Date,
       
     },
+    GitUserName:{
+      type: String,
+    }
   },
   {
     timestamps: true,

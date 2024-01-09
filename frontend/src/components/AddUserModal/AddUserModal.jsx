@@ -25,6 +25,7 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
     email: "",
     Projects: [],
     contactNumber :"" ,
+    GitUserName : "",	
   });
 
 
@@ -62,6 +63,7 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
       email: "",
       Projects: [],
       contactNumber :"",
+      GitUserName : ""
     });
   }, [show]);
 
@@ -233,7 +235,7 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
               </Form.Label>
               <Form.Control
                 type="text"
-                name="Contact Number"
+                name="contactNumber"
                 value={formData.contactNumber}
                 onChange={handleInputChange}
                 placeholder="Enter Contact Number"
@@ -246,6 +248,21 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
               </Form.Control.Feedback>
               </Form.Group>
 
+            
+              <Form.Group controlId="formGitUserName" className="mb-2">
+              <Form.Label>
+                <RiContactsBookFill /> GitUser Name:
+              </Form.Label>
+              <Form.Control
+                type="text"
+                name="GitUserName"
+                value={formData.GitUserName}
+                onChange={handleInputChange}
+                placeholder="Enter GitUser Name"
+                style={{ borderRadius: "10px" }}
+              />
+             
+              </Form.Group>
 
             <Form.Group controlId="formProjects" className="mb-2">
               <Form.Label>

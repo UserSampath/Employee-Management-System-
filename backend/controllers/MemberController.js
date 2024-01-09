@@ -3,7 +3,7 @@ const { Teams } = require("../utils/Constants");
 
 
 const addNewMember = async (req, res) => {
-    const { firstName, lastName, Job, Description, Image,email ,SelectedTeams,Projects,contactNumber,StartedDate} = req.body;
+    const { firstName, lastName, Job, Description, Image,email ,SelectedTeams,Projects,contactNumber,StartedDate,GitUserName} = req.body;
     try {
 
         const Member = new MemberModel({
@@ -16,7 +16,8 @@ const addNewMember = async (req, res) => {
             SelectedTeams,
             contactNumber,
             Projects,
-            StartedDate
+            StartedDate,
+            GitUserName
         });
 
         await Member.save();
@@ -34,7 +35,7 @@ const addNewMember = async (req, res) => {
 const updateMember = async (req, res) => {
     const userId = req.params.id;
     const { firstName, lastName, Job, Description, Image,contactNumber ,email,Projects,
-        StartedDate,SelectedTeams,} = req.body;
+        StartedDate,SelectedTeams,GitUserName} = req.body;
     try {
         const userToUpdate = await MemberModel.findById(userId);
 
@@ -52,6 +53,7 @@ const updateMember = async (req, res) => {
         userToUpdate.Projects = Projects;
         userToUpdate.StartedDate = StartedDate;
         userToUpdate.SelectedTeams = SelectedTeams;
+        userToUpdate.GitUserName = GitUserName;
 
 
         await userToUpdate.save();

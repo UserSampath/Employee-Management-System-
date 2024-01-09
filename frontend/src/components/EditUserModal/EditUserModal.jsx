@@ -24,6 +24,8 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
     email: "",
     Projects: [],
     contactNumber :"" ,
+    GitUserName : ""
+
   });
   const [touched, setTouched] = useState({
     firstName: false,
@@ -53,7 +55,9 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
       SelectedTeams:userData.SelectedTeams,
       email:userData.email,
       Projects:userData.Projects,
-      contactNumber:userData.contactNumber
+      contactNumber:userData.contactNumber,
+      GitUserName : userData.GitUserName
+
     });
  
 }, [userData]);
@@ -231,6 +235,22 @@ const formatDate = (dateString) => {
                 Please enter your Contact number.
               </Form.Control.Feedback>
               </Form.Group>
+
+              <Form.Group controlId="formGitUserName" className="mb-2">
+              <Form.Label>
+                <RiContactsBookFill /> GitUser Name:
+              </Form.Label>
+              <Form.Control
+                type="text"
+                name="GitUserName"
+                value={formData.GitUserName}
+                onChange={handleInputChange}
+                placeholder="Enter GitUser Name"
+                style={{ borderRadius: "10px" }}
+              />
+             
+              </Form.Group>
+
 
             <Form.Group controlId="formProjects" className="mb-2">
               <Form.Label>

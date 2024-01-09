@@ -51,6 +51,19 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
         `http://localhost:4000/api/member/updateMember/${user._id}`,
         updatedUserData
       );
+     
+
+      if (response.status === 200) {
+        const { message, updatedUser } = response.data;
+        Swal.fire({
+          icon: "success",
+          title: "Success! ",
+          text: message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log("Member data:", updatedUser);
+      }
       getUserData();
     } catch (error) {
       console.error("Error updating user:", error);
@@ -76,9 +89,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
         console.log("Member data:", deletedRateUser);
         handleDeleteClose();
         onUserDeleted(user._id);
-      } else {
-        console.error("Error deleting user rate:", response.data.error);
-      }
+      } 
     } catch (error) {
       console.error("Error deleting user rate:", error.message);
     }

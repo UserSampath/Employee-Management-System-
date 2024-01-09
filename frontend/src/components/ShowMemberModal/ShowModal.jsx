@@ -44,9 +44,11 @@ const ShowModal = ({ userShow, handleUserClose, selectedUser }) => {
         <p>{selectedUser.email}</p>
         <div>
         <p>Contact number : 0{selectedUser.contactNumber}</p>
+        <p>Git UserName : {selectedUser.GitUserName}</p>
         <p>Teams: {Array.isArray(selectedUser.SelectedTeams) ? selectedUser.SelectedTeams.join(", ") : selectedUser.SelectedTeams}</p>
         <p>Projects: {Array.isArray(selectedUser.Projects) ? selectedUser.Projects.join(", ") : selectedUser.SelectedTeams}</p>
-        <p>Started Date: {formatDate(selectedUser.StartedDate)}</p>        </div>
+        <p>Started Date: {formatDate(selectedUser.StartedDate)}</p>     
+        </div>
         </div>
       </div>
     </div>

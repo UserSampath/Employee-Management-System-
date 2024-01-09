@@ -8,6 +8,8 @@ import { FaUser, FaBriefcase, FaFile, FaImage ,FaUsers} from 'react-icons/fa';
 import FileBase64 from "react-file-base64";
 import { SlCalender } from "react-icons/sl";
 import Select from 'react-select';
+import { RiContactsBookFill } from "react-icons/ri";
+import { SiPaloaltonetworks } from "react-icons/si";
 
 const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
 
@@ -23,7 +25,14 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
     Projects: [],
     contactNumber :"" ,
   });
-
+  const [touched, setTouched] = useState({
+    firstName: false,
+    lastName: false,
+    Job: false,
+    StartedDate :false,
+    email: false,
+    contactNumber:false,
+  });
 
   const handleTeamSelect = (selectedOptions) => {
     const selectedTeams = selectedOptions.map(option => option.value);
@@ -43,12 +52,27 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
       StartedDate:userData.StartedDate,
       SelectedTeams:userData.SelectedTeams,
       email:userData.email,
-      Projects:userData.Projects
+      Projects:userData.Projects,
+      contactNumber:userData.contactNumber
     });
  
 }, [userData]);
 
-  
+useEffect(() => {
+  setFormData((prevFormData) => ({
+    ...prevFormData,
+    StartedDate: formatDate(userData.StartedDate),
+  }));
+}, [userData]);
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
 
@@ -56,6 +80,11 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
       ...prevFormData,
       [name]: value,
     })); 
+
+    setTouched((prevTouched) => ({
+      ...prevTouched,
+      [name]: true,
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -85,16 +114,16 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
 
   return (
     <div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} dialogClassName="custom-modal">
         <Modal.Header>
           <Modal.Title
             style={{ margin: "auto", paddingLeft: "0px", fontSize: "30px" }}>
             Edit Member
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{ maxHeight: '70vh', overflowY: 'auto', padding:"30px" }}>
           <Form>
-            <Form.Group controlId="formFirstName">
+            <Form.Group controlId="formFirstName" className="mb-2">
               <Form.Label>
                 <FaUser /> First Name:
               </Form.Label>
@@ -105,10 +134,15 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your first name"
                 style={{ borderRadius: "10px" }}
+                isInvalid={touched.firstName && !formData.firstName}
+
               />
+                <Form.Control.Feedback type="invalid">
+                Please enter your first name.
+              </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group controlId="formLastName">
+            <Form.Group controlId="formLastName" className="mb-2">
               <Form.Label>
                 <FaUser /> Last Name:
               </Form.Label>
@@ -119,10 +153,14 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your last name"
                 style={{ borderRadius: "10px" }}
-              />
-            </Form.Group>
+                isInvalid={touched.lastName && !formData.lastName}
 
-            <Form.Group controlId="formEmail">
+              />
+                <Form.Control.Feedback type="invalid">
+                Please enter your Last name.
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId="formEmail" className="mb-2">
               <Form.Label>
                 <FaUser /> Email:
               </Form.Label>
@@ -133,11 +171,14 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your last name"
                 style={{ borderRadius: "10px" }}
+                isInvalid={touched.email && !formData.email}
+
               />
+                 <Form.Control.Feedback type="invalid">
+                Please enter your Email.
+              </Form.Control.Feedback>
             </Form.Group>
-
-
-            <Form.Group controlId="formJob">
+            <Form.Group controlId="formJob" className="mb-2">
               <Form.Label>
                 <FaBriefcase /> Job:
               </Form.Label>
@@ -148,10 +189,15 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your job"
                 style={{ borderRadius: "10px" }}
+                isInvalid={touched.Job && !formData.Job}
+
               />
+                 <Form.Control.Feedback type="invalid">
+                Please enter your Job.
+              </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group controlId="formDescription">
+            <Form.Group controlId="formDescription" className="mb-2">
               <Form.Label>
                 <FaFile /> Description:
               </Form.Label>
@@ -162,27 +208,33 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your description"
                 style={{ borderRadius: "10px" }}
+
               />
+         
             </Form.Group>
 
-
-            <Form.Group controlId="formContactNumber">
+            <Form.Group controlId="formContactNumber" className="mb-2">
               <Form.Label>
-                <FaFile /> Contact Number:
+                <RiContactsBookFill /> Contact Number:
               </Form.Label>
               <Form.Control
-                type="text"
-                name="Contact Number"
-                value={formData.contactNumber}
-                onChange={handleInputChange}
-                placeholder="Enter Contact Number"
-                style={{ borderRadius: "10px" }}
-              />
+               type="text"
+               name="contactNumber"
+               value={'0' + formData.contactNumber}  // Include '0' in the displayed value
+               onChange={handleInputChange}
+               placeholder="Enter Contact Number"
+               style={{ borderRadius: "10px" }}
+               isInvalid={touched.contactNumber && !formData.contactNumber}
+
+            />
+                  <Form.Control.Feedback type="invalid">
+                Please enter your Contact number.
+              </Form.Control.Feedback>
               </Form.Group>
 
-            <Form.Group controlId="formProjects">
+            <Form.Group controlId="formProjects" className="mb-2">
               <Form.Label>
-                <FaFile /> Projects:
+                <SiPaloaltonetworks /> Projects:
               </Form.Label>
               <Form.Control
                 type="text"
@@ -194,7 +246,7 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
               />
               </Form.Group>
 
-            <Form.Group controlId="formStartedDate">
+            <Form.Group controlId="formStartedDate" className="mb-2">
             <Form.Label>
               <SlCalender /> Started Date:
             </Form.Label>
@@ -204,10 +256,15 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
               value={formData.StartedDate}
               onChange={handleInputChange}
               style={{ borderRadius: "10px" }}
+              isInvalid={touched.StartedDate && !formData.StartedDate}
+
             />
+             <Form.Control.Feedback type="invalid">
+                Please enter your Started Date.
+              </Form.Control.Feedback>
           </Form.Group>
 
-         <Form.Group controlId="formSelectedTeams">
+         <Form.Group controlId="formSelectedTeams" className="mb-2">
               <Form.Label>
                 <FaUsers /> Selected Teams:
               </Form.Label>
@@ -219,10 +276,12 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formImage">
+
+            <Form.Group controlId="formImage"  className="mb-2">
               <Form.Label>
                 <FaImage /> Image Upload:
               </Form.Label>
+              <div>
               <FileBase64
                 type="file"
                 multiple={false}
@@ -233,6 +292,7 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
                   }));
                 }}
               />
+              </div>
             </Form.Group>
           </Form>
         </Modal.Body>

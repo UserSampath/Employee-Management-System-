@@ -73,7 +73,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("Rateuser data:", deletedRateUser);
+        console.log("Member data:", deletedRateUser);
         handleDeleteClose();
         onUserDeleted(user._id);
       } else {
@@ -90,11 +90,11 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
       <Container
         className="d-flex justify-content-between align-items-center mt-2"
         style={{
-          backgroundColor: "#ffff",
-          borderBottom: "2px solid #91fb8c",
-          borderRadius: "7px",
-          height: "75px",
-          boxShadow: "2px 1px 2px 2px rgba(0, 0, 0, 0.2)"}}>
+          backgroundColor: "#dff8dd79",
+          borderBottom: "1px solid #91fb8c",
+          borderRadius: "4px",
+          height: "55px",
+          boxShadow: "0 2px 2px rgba(0, 0, 0, 0.1)",}}>
         <div
           className="col-3"
           style={{

@@ -2,6 +2,11 @@ import React from "react";
 import { FaRegUser } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
+import { RiTeamLine } from "react-icons/ri";
+import { FaReact } from "react-icons/fa";
+import { AiOutlineApi } from "react-icons/ai";
+import { TbBrandFlutter } from "react-icons/tb";
+import { MdOutlineDesignServices } from "react-icons/md";
 const SidebarButton = (props) => {
   return (
     <div
@@ -33,36 +38,53 @@ const SidebarButton = (props) => {
               marginLeft: "25px",
             }}>
             <div style={{ marginRight: "10px", marginTop: "2px" }}>
-              {props.buttonType == "User" && (
-                <FaRegUser
+              {props.buttonType == "All Employees" && (
+                <RiTeamLine
                   className={
                     props.selected == true
                       ? "selectedSidebarIcon"
                       : "notSelectedSidebarIcon"
                   }
-                
                   size={20}
                 />
               )}
-              {props.buttonType == "Analytics" && (
-                <MdDashboard
+              {props.buttonType == "Web Team" && (
+                <FaReact
                   className={
                     props.selected == true
                       ? "selectedSidebarIcon"
                       : "notSelectedSidebarIcon"
                   }
-            
                   size={20}
                 />
               )}
-              {props.buttonType == "Settings" && (
-                <IoSettingsSharp
+              {props.buttonType == "Api Team" && (
+                <AiOutlineApi
                   className={
                     props.selected == true
                       ? "selectedSidebarIcon"
                       : "notSelectedSidebarIcon"
                   }
-                  
+                  size={20}
+                />
+              )}
+              {props.buttonType == "Flutter Team" && (
+                <TbBrandFlutter
+                  className={
+                    props.selected == true
+                      ? "selectedSidebarIcon"
+                      : "notSelectedSidebarIcon"
+                  }
+                  size={20}
+                />
+              )}
+              {props.buttonType == "UI/UX Team" && (
+                <MdOutlineDesignServices
+                  className={
+                    props.selected == true
+                      ? "selectedSidebarIcon"
+                      : "notSelectedSidebarIcon"
+                  }
                   size={20}
                 />
               )}

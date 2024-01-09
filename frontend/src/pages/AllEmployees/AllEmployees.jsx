@@ -8,38 +8,39 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-const AdminDashboard = () => {
-
+const AllEmployees = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [users,setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => { 
+  useEffect(() => {
     getUserData();
   }, []);
-  
-   const getUserData = async () => {
-     await axios
-       .get("http://localhost:4000/api/rate/getRateUsersForAdmin", {
-         headers: {
-           "Content-Type": "application/json",
-           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-         },
-       })
-       .then((res) => {
-         console.log(res.data);
-         setUsers(res.data);
-       })
-       .catch((err) => {
-         console.log(err);
-         navigate("/login");
-       });
-   };
-   const handleUserDeleted = (deletedUserId) => {
-    setUsers(prevUsers => prevUsers.filter(user => user._id !== deletedUserId));
+
+  const getUserData = async () => {
+    await axios
+      .get("http://localhost:4000/api/rate/getRateUsersForAdmin", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setUsers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/login");
+      });
+  };
+  const handleUserDeleted = (deletedUserId) => {
+    setUsers((prevUsers) =>
+      prevUsers.filter((user) => user._id !== deletedUserId)
+    );
   };
 
   const handleUserAdded = (newUser) => {
@@ -50,7 +51,7 @@ const AdminDashboard = () => {
     <div className="adminPage">
       <Navbars />
       <div style={{ display: "flex" }}>
-        <Side />
+        <Side selected={"All Employees"} />
         <div
           className="ml-230px"
           style={{ marginLeft: "230px", marginTop: "50px", width: "100%" }}>
@@ -96,4 +97,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default AllEmployees;

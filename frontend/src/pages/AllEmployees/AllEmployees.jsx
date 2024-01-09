@@ -1,18 +1,23 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Side from "../../components/side/Side";
 import Navbars from "../../components/NavBar/Navbar";
 import UserDetails from "../../components/userDetail/UserDetails";
-import { FaPlus } from 'react-icons/fa'; 
+import { FaPlus } from "react-icons/fa";
 import AddUserModal from "../../components/AddUserModal/AddUserModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ShowModal from "../../components/ShowMemberModal/ShowModal";
 
+
+import SearchBar from "../../components/searchBar/SearchBar";
 const AllEmployees = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [users,setUsers] = useState([]);
+
+  
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,6 +59,10 @@ const AllEmployees = () => {
           <div
             style={{ marginRight: "80px" }}
             className="mt-2 d-flex justify-content-end">
+            <SearchBar
+              inputSearchMembers={users}
+              setFilteredUsers={setFilteredUsers}
+            />
             <button
               onClick={handleShow}
               className="button-1 d-flex justify-content-center align-items-center"
@@ -70,8 +79,8 @@ const AllEmployees = () => {
             </button>
           </div>
 
-          {users &&
-            users.map((user, index) => {
+          {filteredUsers &&
+            filteredUsers.map((user, index) => {
               return (
                 <UserDetails
                   user={user}

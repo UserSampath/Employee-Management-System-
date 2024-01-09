@@ -9,14 +9,15 @@ const createToken = (_id) => {
 };
 
 const signupUser = async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, registrationKey } = req.body;
     try {
 
         if (
             !email ||
             !password ||
             !firstName ||
-            !lastName 
+            !lastName ||
+            !registrationKey
         
         ) {
             throw Error("All fields must be filled");
@@ -29,6 +30,10 @@ const signupUser = async (req, res) => {
         }
         if (!validator.isStrongPassword(password)) {
             throw Error("Password not strong enough");
+        }
+
+        if (registrationKey != process.env.REGISTRATION_KEY) {
+            throw Error("Enter correct registration key");
         }
 
         const existingUsers = await userModel.findOne({ email: email });

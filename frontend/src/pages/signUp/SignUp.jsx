@@ -14,11 +14,14 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registrationKey, setRegistrationKey] = useState("");
   //errors
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [registrationKeyError, setRegistrationKeyError] = useState("");
+
 
 
   const signUpButtonClicked = async () => {
@@ -34,6 +37,8 @@ const SignUp = () => {
       setPasswordError("Enter password");
     } else if (!validator.isLength(password, { min: 8 })) {
       setPasswordError("Password must be at least 8 characters long");
+    } else if (!registrationKey) {
+      setRegistrationKeyError("Enter registration key");
     } else {
       await axios
         .post("http://localhost:4000/api/user/signup", {
@@ -41,10 +46,10 @@ const SignUp = () => {
           lastName,
           email,
           password,
+          registrationKey,
         })
         .then((res) => {
           if (res.status == 200) {
-            
             localStorage.setItem("token", JSON.stringify(res.data.token));
             localStorage.setItem(
               "userName",
@@ -125,25 +130,31 @@ const SignUp = () => {
                 onFocus={() => setPasswordError("")}
               />
 
+              <TextInput
+                type={"password"}
+                icon={"lock"}
+                inputName={"Registration Key"}
+                placeholder={"Enter Registration Key"}
+                value={registrationKey}
+                onChange={(value) => setRegistrationKey(value)}
+                errorMessage={registrationKeyError}
+                onFocus={() => setRegistrationKeyError("")}
+              />
+
               <div className="buttonsContainer">
                 <Button
                   type={"1"}
                   text="Sign Up"
                   onClick={signUpButtonClicked}
                 />
+                <Button
+                  onClick={() => navigate("/login")}
+                  type={"2"}
+                  text="Sign In"
+                />
               </div>
-              <div className="newHereContainer">
-                <div>
-                  <h2>Already have an account?</h2>
-                  <div className="newHereButton2">
-                    <Button
-                      onClick={() => navigate("/login")}
-                      type={"2"}
-                      text="Sign In"
-                    />
-                  </div>
-                </div>
-              </div>
+
+              <div></div>
             </div>
           </div>
         </div>

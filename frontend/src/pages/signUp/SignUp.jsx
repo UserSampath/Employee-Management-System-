@@ -65,7 +65,7 @@ const SignUp = () => {
             });
           }
           setTimeout(() => {
-            navigate("/admin");
+            navigate("/");
           }, 1500);
         })
         .catch((err) => {
@@ -164,7 +164,7 @@ const SignUp = () => {
             <div>
               <div className="imgContainerText">
                 <h2 className="whiteH2">Welcome to</h2>
-                <h1>Lenzz Rating System</h1>
+                <h1>Employee Management System</h1>
                 <p>Register to create your account </p>
               </div>
               <img className="signInImage" src="../../image/pic1.png" alt="" />

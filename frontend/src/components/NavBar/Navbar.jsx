@@ -28,14 +28,14 @@ const Navbars = () => {
           <img
             style={{ marginLeft: "30px" }}
             src={Logo}
-            alt="Lenzz Rating system logo"
+            alt=" Employee Management System"
             height="40"
             className="d-inline-block align-top"
           />
           <span
             style={{ color: "#ffffff", fontWeight: "600" }}
             className="ms-4">
-            Lenzz Rating System
+            EMS
           </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

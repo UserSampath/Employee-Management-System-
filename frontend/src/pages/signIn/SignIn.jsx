@@ -47,7 +47,7 @@ const signInButtonClicked = async() => {
             console.log(res.data)
           }
           setTimeout(() => {
-            navigate("/admin");
+            navigate("/");
           }, 1500);
         })
         .catch((err) => {
@@ -103,7 +103,11 @@ const signInButtonClicked = async() => {
                 <div>
                   <h2>New Here?</h2>
                   <div className="newHereButton">
-                    <Button onClick={()=>navigate("/register")} type={"2"} text="Sign Up" />
+                    <Button
+                      onClick={() => navigate("/register")}
+                      type={"2"}
+                      text="Sign Up"
+                    />
                   </div>
                 </div>
               </div>
@@ -116,7 +120,7 @@ const signInButtonClicked = async() => {
             <div>
               <div className="imgContainerText">
                 <h2 className="whiteH2">Welcome to</h2>
-                <h1>Lenzz Rating System</h1>
+                <h1>Employee Management System</h1>
                 <p>Log in to access your account. </p>
               </div>
               <img className="signInImage" src="../../image/pic1.png" alt="" />

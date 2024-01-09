@@ -96,16 +96,18 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
   };
 
   return (
-    <div style={{ cursor: 'pointer' }} >
+    <div style={{ cursor: "pointer" }}>
       {" "}
       <Container
-        className="d-flex justify-content-between align-items-center mt-2"
+        className="d-flex justify-content-between align-items-center mt-2 "
         style={{
           backgroundColor: "#dff8dd79",
           borderBottom: "1px solid #91fb8c",
           borderRadius: "4px",
           height: "55px",
-          boxShadow: "0 2px 2px rgba(0, 0, 0, 0.1)",}}>
+          boxShadow: "0 2px 2px rgba(0, 0, 0, 0.1)",
+          
+        }}>
         <div
           className="col-3"
           style={{
@@ -121,7 +123,8 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
               height: "45px",
               border: "2px solid #6efe67",
             }}
-            onClick={handleUserDetailsClick}/>
+            onClick={handleUserDetailsClick}
+          />
           <div
             style={{
               fontSize: "18px",
@@ -134,11 +137,9 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
         </div>
         <p
           style={{ fontSize: "17px", color: "gray", fontWeight: "600" }}
-          className="col-2">
-          {user.Job}
+          className="col-5">
+          {user.email}
         </p>
-
-        
 
         <div className="m-3 d-flex">
           <button

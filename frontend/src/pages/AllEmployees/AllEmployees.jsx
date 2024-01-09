@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ShowModal from "../../components/ShowMemberModal/ShowModal";
 
 
+
 import SearchBar from "../../components/searchBar/SearchBar";
 const AllEmployees = () => {
   const [show, setShow] = useState(false);
@@ -87,24 +88,19 @@ const AllEmployees = () => {
                   key={index}
                   onUserDeleted={handleUserDeleted}
                   getUserData={getUserData}
-
                 />
               );
             })}
-
         </div>
       </div>
-       
+
       <AddUserModal
         show={show}
         setShow={setShow}
         handleClose={handleClose}
         getUserData={getUserData}
       />
-
     </div>
-
-
   );
 };
 

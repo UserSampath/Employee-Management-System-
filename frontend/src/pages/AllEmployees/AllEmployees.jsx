@@ -6,46 +6,42 @@ import { FaPlus } from 'react-icons/fa';
 import AddUserModal from "../../components/AddUserModal/AddUserModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import ShowModal from "../../components/ShowMemberModal/ShowModal";
 
 const AllEmployees = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const [users, setUsers] = useState([]);
+  const [users,setUsers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     getUserData();
   }, []);
-
-  const getUserData = async () => {
-    await axios
-      .get("http://localhost:4000/api/rate/getRateUsersForAdmin", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setUsers(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        navigate("/login");
-      });
-  };
-  const handleUserDeleted = (deletedUserId) => {
-    setUsers((prevUsers) =>
-      prevUsers.filter((user) => user._id !== deletedUserId)
-    );
+  
+   const getUserData = async () => {
+     await axios
+       .get("http://localhost:4000/api/member/getMembers")
+       .then((res) => {
+         console.log(res.data);
+         setUsers(res.data);
+       })
+       .catch((err) => {
+         console.log(err);
+         navigate("/login");
+       });
+   };
+   
+   const handleUserDeleted = (deletedUserId) => {
+    setUsers(prevUsers => prevUsers.filter(user => user._id !== deletedUserId));
   };
 
   const handleUserAdded = (newUser) => {
     setUsers((prevUsers) => [...prevUsers, newUser]);
   };
+
+ 
+
 
   return (
     <div className="adminPage">
@@ -82,18 +78,24 @@ const AllEmployees = () => {
                   key={index}
                   onUserDeleted={handleUserDeleted}
                   getUserData={getUserData}
+
                 />
               );
             })}
+
         </div>
       </div>
+       
       <AddUserModal
         show={show}
         setShow={setShow}
         handleClose={handleClose}
         getUserData={getUserData}
       />
+
     </div>
+
+
   );
 };
 

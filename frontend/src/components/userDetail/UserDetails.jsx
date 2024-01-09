@@ -7,9 +7,11 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 import axios from "axios";
 import "sweetalert2/dist/sweetalert2.min.css";
 import Swal from "sweetalert2";
-const UserDetails = ({ user, onUserDeleted, getUserData }) => {
+import ShowModal from "../ShowMemberModal/ShowModal";
+const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
   const [show, setShow] = useState(false);
   const [showDelete, setDeleteShow] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null); // New state for selected user
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -18,28 +20,50 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
   const handleDeleteShow = () => setDeleteShow(true);
   const [avgStars, setAvgStars] = useState(0);
 
-  useEffect(() => {
-    const getAvgStars = () => {
-      if (user.Rate.length === 0) {
-        setAvgStars(0);
-      } else {
-        let sumStars = 0;
-        for (let i = 0; i < user.Rate.length; i++) {
-          sumStars = sumStars + user.Rate[i];
-        }
-        setAvgStars(Math.floor(sumStars / user.Rate.length));
-      }
-    };
+  const [userShow, setUserShow] = useState(false);
+  const handleUserClose = () => setUserShow(false);
+  const handleUserShow = () => setUserShow(true);
 
-    getAvgStars();
-  }, [user]);
+
+  
+  const handleUserDetailsClick = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/api/member/getMember/${user._id}`
+      );
+
+      if (response.status === 200) {
+        const selectedUserDetails = response.data.Member;
+        setSelectedUser(selectedUserDetails);
+        handleUserShow(); // Open the modal with fetched user details
+      } else {
+        console.error("Error fetching user details:", response.data.error);
+      }
+    } catch (error) {
+      console.error("Error fetching user details:", error.message);
+    }
+  };
+
 
   const handleEditUser = async (updatedUserData) => {
     try {
       const response = await axios.put(
-        `http://localhost:4000/api/rate/updateUser/${user._id}`,
+        `http://localhost:4000/api/member/updateMember/${user._id}`,
         updatedUserData
       );
+     
+
+      if (response.status === 200) {
+        const { message, updatedUser } = response.data;
+        Swal.fire({
+          icon: "success",
+          title: "Success! ",
+          text: message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log("Member data:", updatedUser);
+      }
       getUserData();
     } catch (error) {
       console.error("Error updating user:", error);
@@ -50,7 +74,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
     console.log(user._id);
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/rate/deleteRateUser/${user._id}`
+        `http://localhost:4000/api/member/deleteMember/${user._id}`
       );
 
       if (response.status === 200) {
@@ -62,19 +86,17 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("Rateuser data:", deletedRateUser);
+        console.log("Member data:", deletedRateUser);
         handleDeleteClose();
         onUserDeleted(user._id);
-      } else {
-        console.error("Error deleting user rate:", response.data.error);
-      }
+      } 
     } catch (error) {
       console.error("Error deleting user rate:", error.message);
     }
   };
 
   return (
-    <div>
+    <div style={{ cursor: 'pointer' }} >
       {" "}
       <Container
         className="d-flex justify-content-between align-items-center mt-2"
@@ -83,8 +105,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
           borderBottom: "1px solid #91fb8c",
           borderRadius: "4px",
           height: "55px",
-          boxShadow: "0 2px 2px rgba(0, 0, 0, 0.1)",
-        }}>
+          boxShadow: "0 2px 2px rgba(0, 0, 0, 0.1)",}}>
         <div
           className="col-3"
           style={{
@@ -100,7 +121,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
               height: "45px",
               border: "2px solid #6efe67",
             }}
-          />
+            onClick={handleUserDetailsClick}/>
           <div
             style={{
               fontSize: "18px",
@@ -117,17 +138,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
           {user.Job}
         </p>
 
-        <div className="col-2 d-flex justify-content-center align-items-center">
-          {[...Array(avgStars)].map((_,index) => (
-            <FaStar color="gold" key={index} />
-          ))}
-          {[...Array(5 - avgStars)].map((_,index) => (
-            <FaStar color="gray" key={index} />
-          ))}
-          <div style={{ fontSize: "16px", marginTop: "4px", color: "gray" }}>
-            ({user.Rate.length})
-          </div>
-        </div>
+        
 
         <div className="m-3 d-flex">
           <button
@@ -152,6 +163,11 @@ const UserDetails = ({ user, onUserDeleted, getUserData }) => {
           </button>
         </div>
       </Container>
+      <ShowModal
+        userShow={userShow}
+        handleUserClose={handleUserClose}
+        selectedUser={selectedUser}
+      />
       <EditUserModal
         show={show}
         handleClose={handleClose}

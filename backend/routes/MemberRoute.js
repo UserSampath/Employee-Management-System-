@@ -5,15 +5,20 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const router = express.Router();
-const { DeleteRateUser, UpdateRateUser, GetRateUser, rateUser, getRateUsers, addNewRateUser, updateUser } = require("../controllers/RateController");
+const {  addNewMember,updateMember,deleteMember,getMembers,getTeamMembers ,GetMember } = require("../controllers/MemberController");
 
-router.post("/addNewRateUser", addNewRateUser);
+router.post("/addNewMember", addNewMember);
+router.put("/updateMember/:id", updateMember);
+router.delete("/deleteMember/:id", deleteMember);
+router.get("/getMembers", getMembers);
+router.get("/getTeamMembers/:teamName", getTeamMembers);
+router.get("/getMember/:id", GetMember);
 
+/*
 router.delete("/deleteRateUser/:id", DeleteRateUser);
 router.put("/UpdateRateUser", UpdateRateUser);
 router.put("/rateUser", rateUser);
 router.get("/getRateUsers", getRateUsers);
 router.get("/getRateUsersForAdmin", userAuthentication, getRateUsers);
-router.put("/updateUser/:id", updateUser);
-router.get("/getRateUser/:id", GetRateUser);
+router.get("/getRateUser/:id", GetRateUser);*/
 module.exports = router;

@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoute");
-const RateUserRoutes = require("./routes/RateUser");
+const MemberRoutes = require("./routes/MemberRoute");
 require('dotenv').config();
 
 app.use(express.urlencoded({ extended: false }));
@@ -20,7 +20,7 @@ app.use(express.json());
 mongoose.set("strictQuery", true);
 
 app.use("/api/user", userRoutes);
-app.use("/api/rate", RateUserRoutes);
+app.use("/api/member", MemberRoutes);
 
 
 

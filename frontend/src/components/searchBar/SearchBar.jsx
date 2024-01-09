@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
 
-const SearchBar = ({ inputSearchMembers }) => {
+const SearchBar = ({ inputSearchMembers, setFilteredUsers }) => {
   const [searchText, setSearchText] = useState("");
-  const [showSearchIcon, setShowSearchIcon] = useState(true);
+
+  useEffect(() => {
+    const data = inputSearchMembers.filter(
+      (user) =>
+        user.firstName.toLowerCase().startsWith(searchText.toLowerCase()) ||
+        user.lastName.toLowerCase().startsWith(searchText.toLowerCase())
+    );
+    setFilteredUsers(data);
+  }, [searchText, inputSearchMembers]);
   return (
     <div
       style={{
@@ -28,10 +36,7 @@ const SearchBar = ({ inputSearchMembers }) => {
         {searchText == "" ? (
           <IoSearchOutline size={22} color="gray" />
         ) : (
-          <IoCloseOutline
-            onClick={() => setSearchText("")}
-            size={24}
-           />
+          <IoCloseOutline onClick={() => setSearchText("")} size={24} />
         )}
       </div>
     </div>

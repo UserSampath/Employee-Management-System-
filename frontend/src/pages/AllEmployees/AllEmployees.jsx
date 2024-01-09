@@ -15,6 +15,7 @@ const AllEmployees = () => {
 
   
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +31,6 @@ const AllEmployees = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setUsers(res.data);
       })
       .catch((err) => {
@@ -59,7 +59,10 @@ const AllEmployees = () => {
           <div
             style={{ marginRight: "80px" }}
             className="mt-2 d-flex justify-content-end">
-           <SearchBar inputSearchMembers={users}  />
+            <SearchBar
+              inputSearchMembers={users}
+              setFilteredUsers={setFilteredUsers}
+            />
             <button
               onClick={handleShow}
               className="button-1 d-flex justify-content-center align-items-center"
@@ -76,8 +79,8 @@ const AllEmployees = () => {
             </button>
           </div>
 
-          {users &&
-            users.map((user, index) => {
+          {filteredUsers &&
+            filteredUsers.map((user, index) => {
               return (
                 <UserDetails
                   user={user}

@@ -66,8 +66,13 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
       }
       getUserData();
     } catch (error) {
-      console.error("Error updating user:", error);
-    }
+      console.error("Error updating data:", error);
+          const errorMessage = error.response?.data?.error || "Error submitting data. Please try again.";
+          Swal.fire({
+            icon: "error",
+            title: "Error!",
+            text: errorMessage,
+          });    }
   };
 
   const handleDelete = async () => {

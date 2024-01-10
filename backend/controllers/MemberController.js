@@ -4,8 +4,9 @@ const validator = require("validator");
 
 
 const addNewMember = async (req, res) => {
-    const { firstName, lastName, Job, Description, Image,email ,SelectedTeams,Projects,contactNumber,StartedDate,GitUserName} = req.body;
+    const { firstName, lastName, Job, Description, Image, email, SelectedTeams, Projects, contactNumber, StartedDate, GitUserName } = req.body;
     try {
+
         if (!validator.isEmail(email)) {
             throw Error("Email not valid");
         }
@@ -13,8 +14,7 @@ const addNewMember = async (req, res) => {
         if (existingUsers) {
             throw Error("User already exists"); 
         }
-
-        
+  
         const Member = new MemberModel({
             firstName,
             lastName,
@@ -28,8 +28,6 @@ const addNewMember = async (req, res) => {
             StartedDate,
             GitUserName
         });
-       
-
 
         await Member.save();
 
@@ -44,11 +42,13 @@ const addNewMember = async (req, res) => {
 
 
 const updateMember = async (req, res) => {
-    console.log(req.id);
+
     const userId = req.params.id;
     const { firstName, lastName, Job, Description, Image,contactNumber ,email,Projects,
         StartedDate,SelectedTeams,GitUserName} = req.body;
     try {
+
+
         const userToUpdate = await MemberModel.findById(userId);
 
         if (!validator.isEmail(email)) {

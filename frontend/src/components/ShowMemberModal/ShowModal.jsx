@@ -28,7 +28,7 @@ const ShowModal = ({ userShow, handleUserClose, selectedUser }) => {
           src={selectedUser.Image ? selectedUser.Image : '../../../image/Men.png'}
           alt=""
           style={{
-            borderRadius: '50px',
+            borderRadius: '100px',
             width: '120px',
             height: '120px',
             border: '2px solid #6efe67',

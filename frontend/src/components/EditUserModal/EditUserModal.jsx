@@ -85,10 +85,6 @@ const formatDate = (dateString) => {
       [name]: value,
     })); 
 
-    setTouched((prevTouched) => ({
-      ...prevTouched,
-      [name]: true,
-    }));
   };
 
   const handleSubmit = (e) => {
@@ -112,7 +108,6 @@ const formatDate = (dateString) => {
     { value: "Flutter Team", label: "Flutter Team" },
     { value: "Qa Team", label: "Qa Team" },
     { value: "Ui Team", label: "Ui Team" },
-    // Add other teams as needed
   ]);
 
 
@@ -138,12 +133,9 @@ const formatDate = (dateString) => {
                 onChange={handleInputChange}
                 placeholder="Enter your first name"
                 style={{ borderRadius: "10px" }}
-                isInvalid={touched.firstName && !formData.firstName}
 
               />
-                <Form.Control.Feedback type="invalid">
-                Please enter your first name.
-              </Form.Control.Feedback>
+                
             </Form.Group>
 
             <Form.Group controlId="formLastName" className="mb-2">
@@ -157,12 +149,9 @@ const formatDate = (dateString) => {
                 onChange={handleInputChange}
                 placeholder="Enter your last name"
                 style={{ borderRadius: "10px" }}
-                isInvalid={touched.lastName && !formData.lastName}
 
               />
-                <Form.Control.Feedback type="invalid">
-                Please enter your Last name.
-              </Form.Control.Feedback>
+            
             </Form.Group>
             <Form.Group controlId="formEmail" className="mb-2">
               <Form.Label>
@@ -175,12 +164,9 @@ const formatDate = (dateString) => {
                 onChange={handleInputChange}
                 placeholder="Enter your last name"
                 style={{ borderRadius: "10px" }}
-                isInvalid={touched.email && !formData.email}
 
               />
-                 <Form.Control.Feedback type="invalid">
-                Please enter your Email.
-              </Form.Control.Feedback>
+                
             </Form.Group>
             <Form.Group controlId="formJob" className="mb-2">
               <Form.Label>
@@ -193,12 +179,9 @@ const formatDate = (dateString) => {
                 onChange={handleInputChange}
                 placeholder="Enter your job"
                 style={{ borderRadius: "10px" }}
-                isInvalid={touched.Job && !formData.Job}
 
               />
-                 <Form.Control.Feedback type="invalid">
-                Please enter your Job.
-              </Form.Control.Feedback>
+                 
             </Form.Group>
 
             <Form.Group controlId="formDescription" className="mb-2">
@@ -228,7 +211,6 @@ const formatDate = (dateString) => {
                onChange={handleInputChange}
                placeholder="Enter Contact Number"
                style={{ borderRadius: "10px" }}
-               isInvalid={touched.contactNumber && !formData.contactNumber}
 
             />
                   <Form.Control.Feedback type="invalid">

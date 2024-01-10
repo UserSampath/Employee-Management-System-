@@ -1,11 +1,20 @@
 const MemberModel = require("../models/MemberModel");
 const { Teams } = require("../utils/Constants");
+const validator = require("validator");
 
 
 const addNewMember = async (req, res) => {
     const { firstName, lastName, Job, Description, Image,email ,SelectedTeams,Projects,contactNumber,StartedDate,GitUserName} = req.body;
     try {
+        if (!validator.isEmail(email)) {
+            throw Error("Email not valid");
+        }
+        const existingUsers = await MemberModel.findOne({ email: email });
+        if (existingUsers) {
+            throw Error("User already exists"); 
+        }
 
+        
         const Member = new MemberModel({
             firstName,
             lastName,
@@ -19,6 +28,8 @@ const addNewMember = async (req, res) => {
             StartedDate,
             GitUserName
         });
+       
+
 
         await Member.save();
 
@@ -40,9 +51,18 @@ const updateMember = async (req, res) => {
     try {
         const userToUpdate = await MemberModel.findById(userId);
 
+        if (!validator.isEmail(email)) {
+            throw Error("Email not valid");
+        }
+        const existingUsers = await MemberModel.findOne({ email: email });
+        if (existingUsers) {
+            throw Error("User already exists"); 
+        }
         if (!userToUpdate) {
             return res.status(404).json({ message: 'User not found' });
         }
+
+
 
         userToUpdate.firstName = firstName;
         userToUpdate.lastName = lastName;

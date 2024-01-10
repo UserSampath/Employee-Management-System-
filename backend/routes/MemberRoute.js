@@ -7,7 +7,7 @@ const upload = multer({ storage: storage });
 const router = express.Router();
 const {  addNewMember,updateMember,deleteMember,getMembers,getTeamMembers ,GetMember } = require("../controllers/MemberController");
 
-router.post("/addNewMember", addNewMember);
+router.post("/addNewMember", userAuthentication, addNewMember);
 router.put("/updateMember/:id", updateMember);
 router.delete("/deleteMember/:id", deleteMember);
 router.get("/getMembers", getMembers);

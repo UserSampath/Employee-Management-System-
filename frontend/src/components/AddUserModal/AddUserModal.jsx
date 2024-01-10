@@ -92,28 +92,37 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
     console.log(formData);
    
         await axios
-      .post("http://localhost:4000/api/member/addNewMember", formData)
-      .then((response) => {
-        setImage("");
-        setShow(false);
-        getUserData();
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text:"User added successfully",
-          showConfirmButton: false,
-          timer: 3000,
-        });
-      })
-      .catch((error) => {
-        console.error("Error submitting data:", error);
-        const errorMessage = error.response?.data?.error || "Error submitting data. Please try again.";
-        Swal.fire({
-          icon: "error",
-          title: "Error!",
-          text: errorMessage,
-        });
-      });
+          .post("http://localhost:4000/api/member/addNewMember", formData, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${JSON.parse(
+                localStorage.getItem("token")
+              )}`,
+            },
+          })
+          .then((response) => {
+            setImage("");
+            setShow(false);
+            getUserData();
+            Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: "User added successfully",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          })
+          .catch((error) => {
+            console.error("Error submitting data:", error);
+            const errorMessage =
+              error.response?.data?.error ||
+              "Error submitting data. Please try again.";
+            Swal.fire({
+              icon: "error",
+              title: "Error!",
+              text: errorMessage,
+            });
+          });
   };
 
   return (

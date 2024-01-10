@@ -59,20 +59,7 @@ const ApiTeam = () => {
               inputSearchMembers={users}
               setFilteredUsers={setFilteredUsers}
             />
-            <button
-              onClick={handleShow}
-              className="button-1 d-flex justify-content-center align-items-center"
-              style={{
-                display: "inline-block",
-                padding: "10px 20px",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
-                cursor: "pointer",
-              }}>
-              <FaPlus style={{ marginRight: "10px" }} />
-              Add new
-            </button>
+     
           </div>
 
           {filteredUsers &&

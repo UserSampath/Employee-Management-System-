@@ -8,24 +8,30 @@ import axios from "axios";
 import "sweetalert2/dist/sweetalert2.min.css";
 import Swal from "sweetalert2";
 import ShowModal from "../ShowMemberModal/ShowModal";
-const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
+import "./userDetails.css"
+
+const UserDetails = ({ user, onUserDeleted, getUserData, onClick }) => {
   const [show, setShow] = useState(false);
   const [showDelete, setDeleteShow] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null); // New state for selected user
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (e) => {
+     e.stopPropagation();
+    setShow(true);
+  };
 
   const handleDeleteClose = () => setDeleteShow(false);
-  const handleDeleteShow = () => setDeleteShow(true);
+  const handleDeleteShow = (e) => {
+    e.stopPropagation();
+    setDeleteShow(true);
+  };
   const [avgStars, setAvgStars] = useState(0);
 
   const [userShow, setUserShow] = useState(false);
   const handleUserClose = () => setUserShow(false);
   const handleUserShow = () => setUserShow(true);
 
-
-  
   const handleUserDetailsClick = async () => {
     try {
       const response = await axios.get(
@@ -35,7 +41,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
       if (response.status === 200) {
         const selectedUserDetails = response.data.Member;
         setSelectedUser(selectedUserDetails);
-        handleUserShow(); // Open the modal with fetched user details
+        handleUserShow(); 
       } else {
         console.error("Error fetching user details:", response.data.error);
       }
@@ -44,14 +50,12 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
     }
   };
 
-
   const handleEditUser = async (updatedUserData) => {
     try {
       const response = await axios.put(
         `http://localhost:4000/api/member/updateMember/${user._id}`,
         updatedUserData
       );
-     
 
       if (response.status === 200) {
         const { message, updatedUser } = response.data;
@@ -67,12 +71,15 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
       getUserData();
     } catch (error) {
       console.error("Error updating data:", error);
-          const errorMessage = error.response?.data?.error || "Error submitting data. Please try again.";
-          Swal.fire({
-            icon: "error",
-            title: "Error!",
-            text: errorMessage,
-          });    }
+      const errorMessage =
+        error.response?.data?.error ||
+        "Error submitting data. Please try again.";
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: errorMessage,
+      });
+    }
   };
 
   const handleDelete = async () => {
@@ -94,7 +101,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
         console.log("Member data:", deletedRateUser);
         handleDeleteClose();
         onUserDeleted(user._id);
-      } 
+      }
     } catch (error) {
       console.error("Error deleting user rate:", error.message);
     }
@@ -104,15 +111,15 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
     <div style={{ cursor: "pointer" }}>
       {" "}
       <Container
-        className="d-flex justify-content-between align-items-center mt-2 "
+        className="d-flex justify-content-between align-items-center mt-2 userDetailsContainer"
         style={{
-          backgroundColor: "#dff8dd79",
+        
           borderBottom: "1px solid #91fb8c",
           borderRadius: "4px",
           height: "55px",
           boxShadow: "0 2px 2px rgba(0, 0, 0, 0.1)",
-          
-        }}>
+        }}
+        onClick={handleUserDetailsClick}>
         <div
           className="col-3"
           style={{
@@ -128,7 +135,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
               height: "45px",
               border: "2px solid #6efe67",
             }}
-            onClick={handleUserDetailsClick}
+            
           />
           <div
             style={{
@@ -154,7 +161,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
               padding: 0,
               margin: 0,
             }}
-            onClick={handleShow}>
+            onClick={(e) => handleShow(e)}>
             <IconButton text="Edit" buttonColor={"green"} />
           </button>
           <button
@@ -164,7 +171,7 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
               padding: 0,
               margin: 0,
             }}
-            onClick={handleDeleteShow}>
+            onClick={(e) => handleDeleteShow(e)}>
             <IconButton text="Delete" buttonColor={"red"} />
           </button>
         </div>

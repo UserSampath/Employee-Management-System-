@@ -54,10 +54,7 @@ const updateMember = async (req, res) => {
         if (!validator.isEmail(email)) {
             throw Error("Email not valid");
         }
-        const existingUsers = await MemberModel.findOne({ email: email });
-        if (existingUsers) {
-            throw Error("User already exists"); 
-        }
+     
         if (!userToUpdate) {
             return res.status(404).json({ message: 'User not found' });
         }

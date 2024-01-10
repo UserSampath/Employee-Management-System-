@@ -12,6 +12,8 @@ import FileBase64 from "react-file-base64";
 import axios from "axios";
 import Select from 'react-select';
 import { RiContactsBookFill } from "react-icons/ri";
+import validator from "validator";
+
 const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
 
   const [formData, setFormData] = useState({
@@ -29,18 +31,7 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
   });
 
 
-  const [touched, setTouched] = useState({
-    firstName: false,
-    lastName: false,
-    Job: false,
-    StartedDate :false,
-    email: false,
-    contactNumber:false,
-  });
-
   const [image, setImage] = useState("");
-
-
 
 
   const handleTeamSelect = (selectedOptions) => {
@@ -73,12 +64,7 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
-    }));
-
-    setTouched((prevTouched) => ({
-      ...prevTouched,
-      [name]: true,
-    }));
+    }))
   };
 
   const handleProjectInputChange = (e) => {
@@ -98,14 +84,13 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
     { value: "Flutter Team", label: "Flutter Team" },
     { value: "Qa Team", label: "Qa Team" },
     { value: "Ui Team", label: "Ui Team" },
-    // Add other teams as needed
   ]);
 
- 
+  
   const handleSubmit = async () => {
     formData.Image = image;
     console.log(formData);
-
+   
         await axios
       .post("http://localhost:4000/api/member/addNewMember", formData)
       .then((response) => {
@@ -122,10 +107,11 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
       })
       .catch((error) => {
         console.error("Error submitting data:", error);
+        const errorMessage = error.response?.data?.error || "Error submitting data. Please try again.";
         Swal.fire({
           icon: "error",
           title: "Error!",
-          text: "Error submitting data. Please try again.",
+          text: errorMessage,
         });
       });
   };
@@ -152,12 +138,8 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your first name"
                 style={{ borderRadius: "10px" }}
-                isInvalid={touched.firstName && !formData.firstName}
-
+            
               />
-               <Form.Control.Feedback type="invalid">
-                Please enter your first name.
-              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formLastName" className="mb-2">
@@ -171,12 +153,8 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your last name"
                 style={{ borderRadius: "10px" }}
-                isInvalid={touched.lastName && !formData.lastName}
-
               />
-               <Form.Control.Feedback type="invalid">
-                Please enter your Last name.
-              </Form.Control.Feedback>
+          
             </Form.Group>
             <Form.Group controlId="formEmail" className="mb-2">
               <Form.Label>
@@ -189,12 +167,8 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your last name"
                 style={{ borderRadius: "10px" }}
-                isInvalid={touched.email && !formData.email}
-
               />
-               <Form.Control.Feedback type="invalid">
-                Please enter your Email.
-              </Form.Control.Feedback>
+           
             </Form.Group>
             <Form.Group controlId="formJob" className="mb-2">
               <Form.Label>
@@ -207,12 +181,9 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
                 onChange={handleInputChange}
                 placeholder="Enter your job"
                 style={{ borderRadius: "10px" }}
-                isInvalid={touched.Job && !formData.Job}
 
               />
-               <Form.Control.Feedback type="invalid">
-                Please enter your Job.
-              </Form.Control.Feedback>
+               
             </Form.Group>
 
             <Form.Group controlId="formDescription" className="mb-2">
@@ -240,12 +211,9 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
                 onChange={handleInputChange}
                 placeholder="Enter Contact Number"
                 style={{ borderRadius: "10px" }}
-                isInvalid={touched.contactNumber && !formData.contactNumber}
 
               />
-               <Form.Control.Feedback type="invalid">
-                Please enter your Contact number.
-              </Form.Control.Feedback>
+            
               </Form.Group>
 
             
@@ -288,12 +256,9 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
               value={formData.StartedDate}
               onChange={handleInputChange}
               style={{ borderRadius: "10px" }}
-              isInvalid={touched.StartedDate && !formData.StartedDate}
 
             />
-             <Form.Control.Feedback type="invalid">
-                Please enter your Started Date.
-              </Form.Control.Feedback>
+         
           </Form.Group>
 
          <Form.Group controlId="formSelectedTeams" className="mb-2">
@@ -337,4 +302,4 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
   );
 };
 
-export default AddUserModal;
+export default AddUserModal

@@ -8,7 +8,7 @@ const router = express.Router();
 const {  addNewMember,updateMember,deleteMember,getMembers,getTeamMembers ,GetMember } = require("../controllers/MemberController");
 
 router.post("/addNewMember", addNewMember);
-router.put("/updateMember/:id", updateMember);
+router.put("/updateMember/:id", userAuthentication, updateMember);
 router.delete("/deleteMember/:id", deleteMember);
 router.get("/getMembers", getMembers);
 router.get("/getTeamMembers/:teamName", getTeamMembers);

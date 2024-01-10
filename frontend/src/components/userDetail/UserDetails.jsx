@@ -49,7 +49,15 @@ const UserDetails = ({ user, onUserDeleted, getUserData , onClick}) => {
     try {
       const response = await axios.put(
         `http://localhost:4000/api/member/updateMember/${user._id}`,
-        updatedUserData
+        updatedUserData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem("token")
+            )}`,
+          },
+        }
       );
      
 

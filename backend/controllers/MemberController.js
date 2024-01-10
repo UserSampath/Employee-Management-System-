@@ -33,6 +33,7 @@ const addNewMember = async (req, res) => {
 
 
 const updateMember = async (req, res) => {
+    console.log(req.id);
     const userId = req.params.id;
     const { firstName, lastName, Job, Description, Image,contactNumber ,email,Projects,
         StartedDate,SelectedTeams,GitUserName} = req.body;

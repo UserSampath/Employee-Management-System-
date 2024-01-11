@@ -2,13 +2,13 @@ import "./app.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./pages/signIn/SignIn";
 import SignUp from "./pages/signUp/SignUp";
-import Rating from "./pages/Rating/Rating";
+import Rating from "./pages/SlideShow/SlideShow";
 import AllEmployees from "./pages/AllEmployees/AllEmployees";
 import WebTeam from "./pages/webTeam/WebTeam";
 import ApiTeam from "./pages/apiTeam/ApiTeam";
 import FlutterTeam from "./pages/flutterTeam/FlutterTeam";
 import UiUxTeam from "./pages/uiUxTeam/UiUxTeam";
-
+import SlideShow from "./pages/SlideShow/SlideShow";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +20,7 @@ function App() {
         <Route path="/api_team" element={<ApiTeam />}></Route>
         <Route path="/flutter_team" element={<FlutterTeam />}></Route>
         <Route path="/ui_ux_team" element={<UiUxTeam />}></Route>
+        <Route path="/slideshow" element={<SlideShow />}></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -7,7 +7,7 @@ import AddUserModal from "../../components/AddUserModal/AddUserModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ShowModal from "../../components/ShowMemberModal/ShowModal";
-
+import { PiSlideshowDuotone } from "react-icons/pi";
 
 
 import SearchBar from "../../components/searchBar/SearchBar";
@@ -46,7 +46,9 @@ const AllEmployees = () => {
     setUsers((prevUsers) => [...prevUsers, newUser]);
   };
 
- 
+ const navigateSlideShow = () => {
+  navigate("/slideshow");
+ }
 
 
   return (
@@ -64,6 +66,24 @@ const AllEmployees = () => {
               inputSearchMembers={users}
               setFilteredUsers={setFilteredUsers}
             />
+  
+             <button
+              onClick={navigateSlideShow}
+              className="button-1 d-flex justify-content-center align-items-center"
+              style={{
+                display: "inline-block",
+                padding: "10px 20px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
+                cursor: "pointer",
+                marginRight:"10px"
+              }}
+              >
+              <PiSlideshowDuotone style={{ marginRight: "10px" }} />
+             SlideShow
+            </button>
+
             <button
               onClick={handleShow}
               className="button-1 d-flex justify-content-center align-items-center"

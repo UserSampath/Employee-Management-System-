@@ -7,12 +7,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Men from "../../../image/Men.png";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
-const Rating = () => {
+
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
+const SlideShow = () => {
   const [index, setIndex] = useState(0);
   const [modalData, setModalData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/rate/getRateUsers')
+    axios.get('http://localhost:4000/api/member/getMembers')
       .then(response => {
         setModalData(response.data);
         console.log(response.data);
@@ -25,16 +28,16 @@ const Rating = () => {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
- const handleNext = () => {
-    setIndex(index + 1);
-  };
 
-  const handlePrev = () => {
-    setIndex(index - 1);
+  const navigate = useNavigate();
+
+  const navigateToAdminPage = () => {
+    navigate('/'); 
   };
   return (
     <div>
       <Navbars />
+      
       <div className='d-flex justify-content-center align-items-center vh-100'>
         <Carousel activeIndex={index} onSelect={handleSelect} >
           
@@ -43,7 +46,18 @@ const Rating = () => {
               <Modals data={data} />
             </Carousel.Item>
           ))}
-        </Carousel>'
+        </Carousel>
+        <div
+          style={{
+            position: 'absolute',
+            top: '10%', // Adjust the position based on your layout
+            left: '5%', // Adjust the position based on your layout
+            cursor: 'pointer',
+          }}
+          onClick={navigateToAdminPage}
+        >
+          <FaArrowLeft size={30} />
+        </div>
         <div
       style={{
         position: 'absolute',
@@ -55,7 +69,7 @@ const Rating = () => {
         alignItems: 'center', 
       }}
     >
-      <button
+      {/* <button
         onClick={handlePrev}
         disabled={index === 0}
         style={{
@@ -75,8 +89,8 @@ const Rating = () => {
         }}
       >
         <FaArrowLeft />
-      </button>
-      <button
+      </button> */}
+      {/* <button
         onClick={handleNext}
         disabled={index === modalData.length - 1}
         style={{
@@ -96,11 +110,11 @@ const Rating = () => {
         }}
       >
         <FaArrowRight />
-      </button>
+      </button> */}
     </div>
       </div>
     </div>
   );
 };
 
-export default Rating;
+export default SlideShow;

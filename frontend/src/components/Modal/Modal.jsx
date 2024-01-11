@@ -25,6 +25,7 @@ const Modals = ({ data }) => {
   
 
   return (
+    <div>
       <Modal.Dialog
       className="modal-lg"
       centered style={{  borderRadius: "10px" }}>
@@ -195,6 +196,7 @@ const Modals = ({ data }) => {
         
       </Modal.Body>
     </Modal.Dialog>
+    </div>
   );
 };
 

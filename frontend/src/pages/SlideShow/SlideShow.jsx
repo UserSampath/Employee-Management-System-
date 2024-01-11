@@ -5,11 +5,10 @@ import Modals from '../../components/Modal/Modal';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Men from "../../../image/Men.png";
-import { FaArrowRight } from "react-icons/fa";
-import { FaArrowLeft } from "react-icons/fa6";
-
+import { SlArrowRight } from "react-icons/sl";import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-
+import { Button } from 'react-bootstrap';
+import { SlArrowLeft } from "react-icons/sl";
 const SlideShow = () => {
   const [index, setIndex] = useState(0);
   const [modalData, setModalData] = useState([]);
@@ -34,84 +33,51 @@ const SlideShow = () => {
   const navigateToAdminPage = () => {
     navigate('/'); 
   };
+
+  const handlePrev = () => {
+    setIndex(index - 1);
+  };
+
+  const handleNext = () => {
+    setIndex(index + 1);
+  };
+
   return (
     <div>
       <Navbars />
       
       <div className='d-flex justify-content-center align-items-center vh-100'>
-        <Carousel activeIndex={index} onSelect={handleSelect} >
-          
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%', // Adjust the position based on your layout
+            left: '5%', // Adjust the position based on your layout
+            cursor: 'pointer',
+          }}
+          onClick={handlePrev}
+        >
+          <SlArrowLeft size={30} />
+        </div>
+
+        <Carousel activeIndex={index} onSelect={handleSelect} controls={false} wrap={true}>
           {modalData.map((data, i) => (
             <Carousel.Item key={i}>
               <Modals data={data} />
             </Carousel.Item>
           ))}
         </Carousel>
+
         <div
           style={{
             position: 'absolute',
-            top: '10%', // Adjust the position based on your layout
-            left: '5%', // Adjust the position based on your layout
+            top: '50%', // Adjust the position based on your layout
+            right: '5%', // Adjust the position based on your layout
             cursor: 'pointer',
           }}
-          onClick={navigateToAdminPage}
+          onClick={handleNext}
         >
-          <FaArrowLeft size={30} />
+          <SlArrowRight size={30} />
         </div>
-        <div
-      style={{
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center', 
-      }}
-    >
-      {/* <button
-        onClick={handlePrev}
-        disabled={index === 0}
-        style={{
-          borderRadius: '50%', 
-          padding: '10px', 
-          backgroundColor: '#fff', 
-          border: '1px solid #ccc', 
-          cursor: 'pointer',
-          transition: 'background-color 0.3s', 
-          outline: 'none', 
-        }}
-        onMouseOver={(e) => {
-          e.target.style.backgroundColor = '#eee'; 
-        }}
-        onMouseOut={(e) => {
-          e.target.style.backgroundColor = '#fff'; 
-        }}
-      >
-        <FaArrowLeft />
-      </button> */}
-      {/* <button
-        onClick={handleNext}
-        disabled={index === modalData.length - 1}
-        style={{
-          borderRadius: '50%', 
-          padding: '10px', 
-          backgroundColor: '#fff', 
-          border: '1px solid #ccc', 
-          cursor: 'pointer',
-          transition: 'background-color 0.3s', 
-          outline: 'none', 
-        }}
-        onMouseOver={(e) => {
-          e.target.style.backgroundColor = '#eee'; 
-        }}
-        onMouseOut={(e) => {
-          e.target.style.backgroundColor = '#fff'; 
-        }}
-      >
-        <FaArrowRight />
-      </button> */}
-    </div>
       </div>
     </div>
   );

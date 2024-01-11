@@ -81,7 +81,7 @@ const AllEmployees = () => {
               }}
               >
               <PiSlideshowDuotone style={{ marginRight: "10px" }} />
-             = SlideShow
+             SlideShow
             </button>
 
             <button

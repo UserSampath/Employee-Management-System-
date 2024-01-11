@@ -47,6 +47,17 @@ const SlideShow = () => {
       <Navbars />
       
       <div className='d-flex justify-content-center align-items-center vh-100'>
+      <div
+          style={{
+            position: 'absolute',
+            top: '10%', // Adjust the position based on your layout
+            left: '5%', // Adjust the position based on your layout
+            cursor: 'pointer',
+          }}
+          onClick={navigateToAdminPage}
+        >
+          <FaArrowLeft size={30} />
+        </div>
         <div
           style={{
             position: 'absolute',

@@ -66,8 +66,7 @@ const AllEmployees = () => {
               inputSearchMembers={users}
               setFilteredUsers={setFilteredUsers}
             />
-            <div style={{                padding: "10px ",
-}}>
+  
              <button
               onClick={navigateSlideShow}
               className="button-1 d-flex justify-content-center align-items-center"
@@ -78,13 +77,12 @@ const AllEmployees = () => {
                 borderRadius: "5px",
                 boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
                 cursor: "pointer",
+                marginRight:"10px"
               }}
               >
               <PiSlideshowDuotone style={{ marginRight: "10px" }} />
               Employee SlideShow
             </button>
-            </div>
-            <div style={{                padding: "10px "}}>
 
             <button
               onClick={handleShow}
@@ -100,7 +98,6 @@ const AllEmployees = () => {
               <FaPlus style={{ marginRight: "10px" }} />
               Add new
             </button>
-            </div>
           </div>
 
           {filteredUsers &&

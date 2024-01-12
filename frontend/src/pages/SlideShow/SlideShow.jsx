@@ -4,10 +4,8 @@ import Carousel from 'react-bootstrap/Carousel';
 import Modals from '../../components/Modal/Modal';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Men from "../../../image/Men.png";
 import { SlArrowRight } from "react-icons/sl";import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { Button } from 'react-bootstrap';
 import { SlArrowLeft } from "react-icons/sl";
 const SlideShow = () => {
   const [index, setIndex] = useState(0);
@@ -17,7 +15,6 @@ const SlideShow = () => {
     axios.get('http://localhost:4000/api/member/getMembers')
       .then(response => {
         setModalData(response.data);
-        console.log(response.data);
       })
       .catch(error => {
         console.error('Error fetching data from the backend:', error);
@@ -39,19 +36,18 @@ const SlideShow = () => {
   };
 
   const handleNext = () => {
-    setIndex(index + 1);
+    setIndex(index === modalData.length - 1 ? 0 : index + 1);
   };
 
   return (
     <div>
       <Navbars />
-      
       <div className='d-flex justify-content-center align-items-center vh-100'>
       <div
           style={{
             position: 'absolute',
-            top: '10%', // Adjust the position based on your layout
-            left: '5%', // Adjust the position based on your layout
+            top: '10%',
+            left: '5%', 
             cursor: 'pointer',
           }}
           onClick={navigateToAdminPage}
@@ -61,8 +57,8 @@ const SlideShow = () => {
         <div
           style={{
             position: 'absolute',
-            top: '50%', // Adjust the position based on your layout
-            left: '5%', // Adjust the position based on your layout
+            top: '50%', 
+            left: '5%', 
             cursor: 'pointer',
           }}
           onClick={handlePrev}
@@ -81,8 +77,8 @@ const SlideShow = () => {
         <div
           style={{
             position: 'absolute',
-            top: '50%', // Adjust the position based on your layout
-            right: '5%', // Adjust the position based on your layout
+            top: '50%', 
+            right: '5%', 
             cursor: 'pointer',
           }}
           onClick={handleNext}

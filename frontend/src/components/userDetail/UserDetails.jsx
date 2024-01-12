@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import IconButton from "../IconButton/IconButton";
-import { FaStar } from "react-icons/fa";
 import EditUserModal from "../EditUserModal/EditUserModal";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import axios from "axios";
@@ -26,7 +25,6 @@ const UserDetails = ({ user, onUserDeleted, getUserData, onClick }) => {
     e.stopPropagation();
     setDeleteShow(true);
   };
-  const [avgStars, setAvgStars] = useState(0);
 
   const [userShow, setUserShow] = useState(false);
   const handleUserClose = () => setUserShow(false);
@@ -66,7 +64,6 @@ const UserDetails = ({ user, onUserDeleted, getUserData, onClick }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("Member data:", updatedUser);
       }
       getUserData();
     } catch (error) {
@@ -98,7 +95,6 @@ const UserDetails = ({ user, onUserDeleted, getUserData, onClick }) => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("Member data:", deletedRateUser);
         handleDeleteClose();
         onUserDeleted(user._id);
       }

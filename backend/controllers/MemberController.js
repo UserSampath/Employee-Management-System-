@@ -48,7 +48,6 @@ const updateMember = async (req, res) => {
         StartedDate,SelectedTeams,GitUserName} = req.body;
     try {
 
-
         const userToUpdate = await MemberModel.findById(userId);
 
         if (!validator.isEmail(email)) {
@@ -58,8 +57,6 @@ const updateMember = async (req, res) => {
         if (!userToUpdate) {
             return res.status(404).json({ message: 'User not found' });
         }
-
-
 
         userToUpdate.firstName = firstName;
         userToUpdate.lastName = lastName;
@@ -100,27 +97,7 @@ const deleteMember = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-/*
-const UpdateRateUser = async (req, res) => {
-    const { Rate, userId } = req.body;
 
-    try {
-        const updatedRateUser = await RateuserModel.findByIdAndUpdate(
-            userId,
-            { $push: { Rate: Rate } },
-            { new: true, runValidators: true }
-        );
-
-        if (!updatedRateUser) {
-            throw Error("User not found");
-        }
-
-        res.status(200).json({ message: "User updated successfully", updatedRateUser });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
-*/
 
 const GetMember = async (req, res) => {
     const userId = req.params.id;
@@ -137,27 +114,8 @@ const GetMember = async (req, res) => {
     }
 };
 
-/*
-const rateUser = async (req, res) => {
-    const { Rate, id } = req.body;
-    try {
-        const updatedRateUser = await RateuserModel.findByIdAndUpdate(
-            id,
-            { $push: { Rate: Rate } },
-            { new: true }
 
-        );
 
-        if (!updatedRateUser) {
-            throw Error("User not found");
-        }
-
-        res.status(200).json({ message: "User updated successfully", Rate: updatedRateUser.Rate });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
-*/
 const getMembers = async (req, res) => {
     try {
         const Members = await MemberModel.find();
@@ -185,11 +143,7 @@ const getTeamMembers = async (req, res) => {
 
 
 module.exports = {
-    //DeleteRateUser,
-    //UpdateRateUser,
     GetMember,
-    //rateUser,
-    //getRateUsers,
     getMembers,
     deleteMember,
     addNewMember,

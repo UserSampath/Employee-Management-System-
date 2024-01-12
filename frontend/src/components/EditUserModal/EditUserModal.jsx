@@ -3,7 +3,6 @@ import { useState,useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/esm/Button';
 import { Form } from 'react-bootstrap';
-import Axios from 'axios';
 import { FaUser, FaBriefcase, FaFile, FaImage ,FaUsers} from 'react-icons/fa';
 import FileBase64 from "react-file-base64";
 import { SlCalender } from "react-icons/sl";
@@ -57,9 +56,7 @@ const EditUserModal = ({ handleClose, show, userData, handleEdit }) => {
       Projects:userData.Projects,
       contactNumber:userData.contactNumber,
       GitUserName : userData.GitUserName
-
     });
- 
 }, [userData]);
 
 useEffect(() => {

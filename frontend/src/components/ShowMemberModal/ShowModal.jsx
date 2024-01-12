@@ -3,23 +3,7 @@ import { Modal } from "react-bootstrap";
 import { IoIosClose } from "react-icons/io";
 import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
 const ShowModal = ({ userShow, handleUserClose, selectedUser }) => {
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.toLocaleString("default", { month: "long" });
-    const year = date.getFullYear();
-
-    return `${day} ${month} ${year}`;
-  };
-  const formatContactNumber = (contactNumber) => {
-    // Assuming the contact number is in the format "0713246556"
-    const formattedContactNumber = contactNumber.replace(
-      /(\d{3})(\d{3})(\d{4})/,
-      "$1 $2 $3"
-    );
-    return formattedContactNumber;
-  };
-
+ 
   return (
     <Modal
       show={userShow}
@@ -40,7 +24,6 @@ const ShowModal = ({ userShow, handleUserClose, selectedUser }) => {
           onClick={() => handleUserClose()}>
           <IoIosClose size={35} />
         </div>
-        {console.log(selectedUser)}
         {selectedUser && (
           <div
             className=" d-flex"

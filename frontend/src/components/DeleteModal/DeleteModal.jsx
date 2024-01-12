@@ -2,8 +2,7 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/esm/Button';
 import 'sweetalert2/dist/sweetalert2.min.css'; 
-import Swal from 'sweetalert2'
-import axios from "axios";
+
 
 const DeleteModal = ({handleDeleteClose,showDelete,userData,handleDelete}) => {
 

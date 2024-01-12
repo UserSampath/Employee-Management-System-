@@ -44,7 +44,6 @@ const signInButtonClicked = async() => {
               showConfirmButton: false,
               timer: 1500,
             });
-            console.log(res.data)
           }
           setTimeout(() => {
             navigate("/");

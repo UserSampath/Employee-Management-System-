@@ -27,7 +27,6 @@ const WebTeam = () => {
      await axios
        .get(`http://localhost:4000/api/member/getTeamMembers/${team}`)
        .then((res) => {
-         console.log(res.data);
          setUsers(res.data);
        })
        .catch((err) => {

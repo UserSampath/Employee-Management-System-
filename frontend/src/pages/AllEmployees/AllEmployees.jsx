@@ -29,11 +29,10 @@ const AllEmployees = () => {
      await axios
        .get("http://localhost:4000/api/member/getMembers")
        .then((res) => {
-         console.log(res.data);
          setUsers(res.data);
        })
        .catch((err) => {
-         console.log(err);
+         console.error(err);
          navigate("/login");
        });
    };

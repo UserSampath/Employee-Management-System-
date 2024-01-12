@@ -12,7 +12,6 @@ import FileBase64 from "react-file-base64";
 import axios from "axios";
 import Select from 'react-select';
 import { RiContactsBookFill } from "react-icons/ri";
-import validator from "validator";
 
 const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
 
@@ -88,9 +87,7 @@ const AddUserModal = ({ handleClose, show, getUserData, setShow }) => {
 
   
   const handleSubmit = async () => {
-    formData.Image = image;
-    console.log(formData);
-   
+    formData.Image = image;   
         await axios
           .post("http://localhost:4000/api/member/addNewMember", formData, {
             headers: {
